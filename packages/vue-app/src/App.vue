@@ -7,14 +7,13 @@ import "../../core-ui/src/components/cards-list.element";
 const cardListRef = ref(null);
 
 onMounted(async () => {
-	notiBloc.subscribe((state) => {
+	notiBloc.store.subscribe((state) => {
 		console.log(JSON.stringify(state));
 	});
 
 	notiBloc.showInfo("Se mostrará?");
 
 	const cards = await cardBloc.getAllCards();
-	console.log(JSON.stringify(cards));
 
 	if (cardListRef.value) {
 		cardListRef.value.cards = cards;

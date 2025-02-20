@@ -1,18 +1,11 @@
-import { Store } from "../store";
+import { createValtioStore } from "../store";
 import type { Card } from "./card.model";
 
 export type CardBlocState = {
 	cards: Card[];
 };
 
-class CardStore extends Store<CardBlocState> {
-	constructor() {
-		super("poke_cards_state");
-	}
-
-	static _getInstance(): CardStore {
-		return new CardStore();
-	}
-}
-
-export const cardStore = CardStore._getInstance();
+export const cardStore = createValtioStore<CardBlocState>(
+	{ cards: [] },
+	"poke_cards_state",
+);

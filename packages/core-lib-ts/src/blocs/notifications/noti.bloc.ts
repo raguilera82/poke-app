@@ -1,4 +1,4 @@
-import { Noti } from "./noti.model";
+import { Noti, type NotiType } from "./noti.model";
 import { notiStore } from "./noti.store";
 
 class NotiBloc {
@@ -7,17 +7,13 @@ class NotiBloc {
 		notiStore.setState({ noti });
 	}
 
-	get noti() {
+	get noti(): NotiType {
 		return notiStore.getState().noti;
 	}
 
-	get store() {
+	get store(): typeof notiStore {
 		return notiStore;
-	}
-
-	static _getInstance() {
-		return new NotiBloc();
 	}
 }
 
-export const notiBloc = NotiBloc._getInstance();
+export const notiBloc = new NotiBloc();

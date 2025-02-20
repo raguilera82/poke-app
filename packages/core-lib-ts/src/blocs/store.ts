@@ -1,62 +1,24 @@
-export class Store<T> {
-	subscribers: Array<(state: T) => void>;
-	state: T | null;
-	persistKey: string;
+import { proxy, subscribe } from "valtio";
 
-	constructor(persistKey: string) {
-		this.subscribers = [];
-		this.state = null;
-		this.persistKey = persistKey;
+export function createValtioStore<T extends object>(
+	initialState: T,
+	storageKey: string,
+) {
+	const persistedState = sessionStorage.getItem(storageKey);
+	const state = proxy<T>(
+		persistedState ? JSON.parse(persistedState) : initialState,
+	);
 
-		this.loadPersistedState();
+	subscribe(state, () => {
+		sessionStorage.setItem(storageKey, JSON.stringify(state));
+	});
 
-		window.addEventListener("beforeunload", () => {
-			this.savePersistedState();
-		});
-	}
-
-	loadPersistedState(): void {
-		const persistedState = sessionStorage.getItem(this.persistKey);
-		if (persistedState) {
-			this.state = JSON.parse(persistedState);
-			sessionStorage.removeItem(this.persistKey);
-		}
-	}
-
-	savePersistedState(): void {
-		sessionStorage.setItem(this.persistKey, JSON.stringify(this.state));
-	}
-
-	setState(newState: Partial<T>) {
-		if (!newState) {
-			return;
-		}
-		this.state = { ...this.state, ...newState };
-		this.notifySubscribers();
-	}
-
-	getState(): T | null {
-		return this.state;
-	}
-
-	subscribe(callback: (state: T) => void): void {
-		this.subscribers.push(callback);
-	}
-
-	unsubscribe(callback: (state: T) => void): void {
-		const index = this.subscribers.indexOf(callback);
-		if (index !== -1) {
-			this.subscribers.splice(index, 1);
-		}
-	}
-
-	notifySubscribers(): void {
-		for (const callback of this.subscribers) {
-			this.notifySubscriber(callback);
-		}
-	}
-
-	notifySubscriber(callback: (state: T) => void) {
-		callback(this.state);
-	}
+	return {
+		setState: (newState: Partial<T>) => {
+			Object.assign(state, newState);
+		},
+		getState: () => state,
+		subscribe: (callback: (state: T) => void) =>
+			subscribe(state, () => callback(state)),
+	};
 }

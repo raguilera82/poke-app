@@ -25,10 +25,6 @@ class ConfigBloc {
 	get config(): ConfigType {
 		return configStore.getState().config;
 	}
-
-	static _getInstance(): ConfigBloc {
-		return new ConfigBloc();
-	}
 }
 
-export const configBloc = ConfigBloc._getInstance();
+export const configBloc = new ConfigBloc();

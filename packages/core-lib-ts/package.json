@@ -11,5 +11,9 @@
 		"typescript": "^5.5.3",
 		"vite": "^5.4.1",
 		"vitest": "^2.0.5"
+	},
+	"dependencies": {
+		"valtio": "^1.13.2",
+		"valtio-persist": "^1.0.2"
 	}
 }
