@@ -5,8 +5,8 @@ import { cardBloc } from '../../../core-lib-ts/src/blocs/cards/card.bloc';
 import { CardType } from '../../../core-lib-ts/src/blocs/cards/card.model';
 import {
   notiBloc,
-  NotiBlocState,
 } from '../../../core-lib-ts/src/blocs/notifications/noti.bloc';
+import { NotiStoreState } from '../../../core-lib-ts/src/blocs/notifications/noti.store';
 import '../../../core-ui/src/components/cards-list.element.js';
 import '../../../core-ui/src/my-element.js';
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     this.cards = await cardBloc.getAllCards();
 
-    notiBloc.subscribe((state: NotiBlocState) => {
+    notiBloc.store.subscribe((state: NotiStoreState) => {
       console.log(JSON.stringify(state));
     });
 

@@ -1,4 +1,4 @@
-export class BaseBloc<T> {
+export class Store<T> {
   subscribers: Array<(state: T) => void>;
   state: T | null;
   persistKey: string;

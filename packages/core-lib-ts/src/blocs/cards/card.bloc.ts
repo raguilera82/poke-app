@@ -1,22 +1,16 @@
 import { Cache } from "../../common/decorators/cache";
-import { BaseBloc } from "../base.bloc";
 import { Card } from "./card.model";
+import { cardStore } from "./card.store";
 import { CardsRepository } from "./cards.repository";
 
-export type CardBlocState = {
-  cards: Card[];
-};
-
-class CardBloc extends BaseBloc<CardBlocState> {
+class CardBloc {
   @Cache("poke_cards_cache")
   async getAllCards(): Promise<Card[]> {
     const cardsRepository = new CardsRepository();
     const cards = await cardsRepository.getAllCards();
-    this.setState({ cards });
+    console.log("cards", cards);
+    cardStore.setState({ cards });
     return cards;
-  }
-  constructor() {
-    super("poke_cards_state");
   }
 
   static _getInstance(): CardBloc {

@@ -1,12 +1,8 @@
 import axios from "axios";
-import { BaseBloc } from "../base.bloc";
 import { Config, ConfigType } from "./config.model";
+import { configStore } from "./config.store";
 
-export type ConfigBlocState = {
-  config: ConfigType;
-};
-
-class ConfigBloc extends BaseBloc<ConfigBlocState> {
+class ConfigBloc {
   async loadConfig(): Promise<void> {
     try {
       const response = await axios.get("/config.json");
@@ -20,18 +16,14 @@ class ConfigBloc extends BaseBloc<ConfigBlocState> {
         apiKey: data.apiKey,
       });
 
-      this.setState({ config });
+      configStore.setState({ config });
     } catch (error) {
       console.error("Error cargando la configuración:", error);
     }
   }
 
   get config(): ConfigType {
-    return this.state.config;
-  }
-
-  constructor() {
-    super("poke_config_state");
+    return configStore.getState().config;
   }
 
   static _getInstance(): ConfigBloc {

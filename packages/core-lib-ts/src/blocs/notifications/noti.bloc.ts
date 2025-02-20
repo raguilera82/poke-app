@@ -1,32 +1,21 @@
-import { BaseBloc } from "../base.bloc";
-import { Noti, NotiType } from "./noti.model";
+import { Noti } from "./noti.model";
+import { notiStore } from "./noti.store";
 
-export type NotiBlocState = {
-  noti: NotiType;
-};
+class NotiBloc {
 
-class NotiBloc extends BaseBloc<NotiBlocState> {
-  /**
-   *
-   * @param {string} msg
-   */
-  showInfo(msg) {
+  showInfo(msg: string) {
     const noti = new Noti({ msg, type: "INFO" });
-    this.setState({ noti });
-  }
-
-  constructor() {
-    super("poke_noti_state");
+    notiStore.setState({ noti });
   }
 
   get noti() {
-    return this.getState().noti;
+    return notiStore.getState().noti;
   }
 
-  /**
-   *
-   * @returns {NotiBloc}
-   */
+  get store() {
+    return notiStore;
+  }
+
   static _getInstance() {
     return new NotiBloc();
   }

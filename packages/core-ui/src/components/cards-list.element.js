@@ -60,13 +60,14 @@ export class CardList extends LitElement {
       </style>
       <div class="cards-container">
         ${this.cards &&
-        this.cards.map(
-          (card) => html`
+      this.cards.map(
+        (card) => html`
             <div class="card">
               <img src="${card.imageCard}" alt="${card.nameCard}" />
+              <p>${card.level}</p>
             </div>
           `
-        )}
+      )}
       </div>
     `;
   }

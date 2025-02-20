@@ -4,7 +4,7 @@ import "../../core-ui/src/components/cards-list.element.js";
 import "./App.css";
 
 function App() {
-  
+
   const [cards, setCards] = useState([]);
   const cardListRef = useRef(null);
 

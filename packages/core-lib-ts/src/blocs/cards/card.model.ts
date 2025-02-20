@@ -19,7 +19,7 @@ export class Card {
     this.idCard = card.idCard;
     this.nameCard = card.nameCard;
     this.supertype = card.supertype;
-    this.level = card.level;
+    this.level = card.level || "No Level Specified";
     this.hp = card.hp;
     this.imageCard = card.imageCard;
   }
