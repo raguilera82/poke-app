@@ -8,29 +8,29 @@ import { cardBloc } from "./card.bloc";
 vi.mock("axios");
 
 describe("Cards BLoC", () => {
-  it("should get all cards", async () => {
-    vi.mocked(axios, true).get.mockResolvedValueOnce(config200);
-    await configBloc.loadConfig();
+	it("should get all cards", async () => {
+		vi.mocked(axios, true).get.mockResolvedValueOnce(config200);
+		await configBloc.loadConfig();
 
-    vi.clearAllMocks();
+		vi.clearAllMocks();
 
-    vi.mocked(axios, true).get.mockResolvedValueOnce(cards200);
-    const cards = await cardBloc.getAllCards();
+		vi.mocked(axios, true).get.mockResolvedValueOnce(cards200);
+		const cards = await cardBloc.getAllCards();
 
-    const firstCard = cards[0];
-    expect(firstCard.idCard).toEqual("dp3-1");
-    expect(firstCard.nameCard).toEqual("Ampharos");
-    expect(firstCard.supertype).toEqual("Pokémon");
-    expect(firstCard.level).toEqual("52");
-    expect(firstCard.hp).toEqual("130");
-    expect(firstCard.imageCard).toEqual(
-      "https://images.pokemontcg.io/dp3/1_hires.png"
-    );
+		const firstCard = cards[0];
+		expect(firstCard.idCard).toEqual("dp3-1");
+		expect(firstCard.nameCard).toEqual("Ampharos");
+		expect(firstCard.supertype).toEqual("Pokémon");
+		expect(firstCard.level).toEqual("52");
+		expect(firstCard.hp).toEqual("130");
+		expect(firstCard.imageCard).toEqual(
+			"https://images.pokemontcg.io/dp3/1_hires.png",
+		);
 
-    const cachedCards = await cardBloc.getAllCards();
+		const cachedCards = await cardBloc.getAllCards();
 
-    expect(cachedCards).toEqual(cards);
+		expect(cachedCards).toEqual(cards);
 
-    expect(axios.get).toHaveBeenCalledTimes(1);
-  });
+		expect(axios.get).toHaveBeenCalledTimes(1);
+	});
 });

@@ -4,12 +4,12 @@
  * @property {string} type
  */
 export class Noti {
-  /**
-   *
-   * @param {NotiType} noti
-   */
-  constructor({ msg, type }) {
-    this.msg = msg;
-    this.type = type;
-  }
+	/**
+	 *
+	 * @param {NotiType} noti
+	 */
+	constructor({ msg, type }) {
+		this.msg = msg;
+		this.type = type;
+	}
 }

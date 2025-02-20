@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit'
+import { LitElement, css, html } from "lit";
 
 /**
  * An example element.
@@ -7,28 +7,28 @@ import { LitElement, css, html } from 'lit'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
-  static get properties() {
-    return {
-      /**
-       * Copy for the read the docs hint.
-       */
-      docsHint: { type: String },
+	static get properties() {
+		return {
+			/**
+			 * Copy for the read the docs hint.
+			 */
+			docsHint: { type: String },
 
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: { type: Number },
-    }
-  }
+			/**
+			 * The number of times the button has been clicked.
+			 */
+			count: { type: Number },
+		};
+	}
 
-  constructor() {
-    super()
-    this.docsHint = 'Click on the Vite and Lit logos to learn more'
-    this.count = 0
-  }
+	constructor() {
+		super();
+		this.docsHint = "Click on the Vite and Lit logos to learn more";
+		this.count = 0;
+	}
 
-  render() {
-    return html`
+	render() {
+		return html`
       <slot></slot>
       <div class="card">
         <button @click=${this._onClick} part="button">
@@ -36,15 +36,15 @@ export class MyElement extends LitElement {
         </button>
       </div>
       <p class="read-the-docs">${this.docsHint}</p>
-    `
-  }
+    `;
+	}
 
-  _onClick() {
-    this.count++
-  }
+	_onClick() {
+		this.count++;
+	}
 
-  static get styles() {
-    return css`
+	static get styles() {
+		return css`
       :host {
         max-width: 1280px;
         margin: 0 auto;
@@ -114,8 +114,8 @@ export class MyElement extends LitElement {
           background-color: #f9f9f9;
         }
       }
-    `
-  }
+    `;
+	}
 }
 
-window.customElements.define('my-element', MyElement)
+window.customElements.define("my-element", MyElement);

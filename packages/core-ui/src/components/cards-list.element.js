@@ -1,19 +1,19 @@
-import { css, html, LitElement } from "lit";
+import { LitElement, css, html } from "lit";
 
 export class CardList extends LitElement {
-  static get properties() {
-    return {
-      cards: { type: Array },
-    };
-  }
+	static get properties() {
+		return {
+			cards: { type: Array },
+		};
+	}
 
-  constructor() {
-    super();
-    this.cards = [];
-  }
+	constructor() {
+		super();
+		this.cards = [];
+	}
 
-  static get styles() {
-    return css`
+	static get styles() {
+		return css`
       .cards-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -51,30 +51,29 @@ export class CardList extends LitElement {
         }
       }
     `;
-  }
+	}
 
-  render() {
-    return html`
+	render() {
+		return html`
       <style>
         ${this.constructor.styles.cssText}
       </style>
       <div class="cards-container">
-        ${this.cards &&
-      this.cards.map(
-        (card) => html`
+        ${this.cards?.map(
+					(card) => html`
             <div class="card">
               <img src="${card.imageCard}" alt="${card.nameCard}" />
               <p>${card.level}</p>
             </div>
-          `
-      )}
+          `,
+				)}
       </div>
     `;
-  }
+	}
 
-  createRenderRoot() {
-    return this; // Evita el uso del Shadow DOM
-  }
+	createRenderRoot() {
+		return this; // Evita el uso del Shadow DOM
+	}
 }
 
 customElements.define("poke-cards-list", CardList);

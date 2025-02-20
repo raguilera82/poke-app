@@ -4,12 +4,12 @@ import App from "./App.vue";
 import "./style.css";
 
 async function loadConfigAndRenderApp() {
-  try {
-    await configBloc.loadConfig();
-    createApp(App).mount("#app");
-  } catch (error) {
-    console.error("Error loading configuration:", error);
-  }
+	try {
+		await configBloc.loadConfig();
+		createApp(App).mount("#app");
+	} catch (error) {
+		console.error("Error loading configuration:", error);
+	}
 }
 
 loadConfigAndRenderApp();

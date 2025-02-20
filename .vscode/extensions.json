@@ -1,14 +1,14 @@
 {
-    "recommendations": [
-        "vue.volar",
-        "kuscamara.remove-unused-imports",
-        "angular.ng-template",
-        "chakrounanas.turbo-console-log",
-        "runem.lit-plugin",
-        "bierner.lit-html",
-        "christian-kohler.path-intellisense",
-        "NuclleaR.vscode-extension-auto-import",
-        "Perkovec.emoji",
-        "esbenp.prettier-vscode"
-    ]
+	"recommendations": [
+		"vue.volar",
+		"angular.ng-template",
+		"chakrounanas.turbo-console-log",
+		"runem.lit-plugin",
+		"bierner.lit-html",
+		"christian-kohler.path-intellisense",
+		"NuclleaR.vscode-extension-auto-import",
+		"Perkovec.emoji",
+		"biomejs.biome",
+		"ms-playwright.playwright"
+	]
 }

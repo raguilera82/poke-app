@@ -4,36 +4,35 @@ import "../../core-ui/src/components/cards-list.element.js";
 import "./App.css";
 
 function App() {
+	const [cards, setCards] = useState([]);
+	const cardListRef = useRef(null);
 
-  const [cards, setCards] = useState([]);
-  const cardListRef = useRef(null);
+	useEffect(() => {
+		const fetchCards = async () => {
+			try {
+				const allCards = await cardBloc.getAllCards();
+				setCards(allCards);
+			} catch (error) {
+				console.error("Error fetching cards:", error);
+			}
+		};
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const allCards = await cardBloc.getAllCards();
-        setCards(allCards);
-      } catch (error) {
-        console.error("Error fetching cards:", error);
-      }
-    };
+		fetchCards();
+	}, []);
 
-    fetchCards();
-  }, []);
+	useEffect(() => {
+		if (cardListRef.current) {
+			cardListRef.current.cards = cards;
+		}
+	}, [cards]);
 
-  useEffect(() => {
-    if (cardListRef.current) {
-      cardListRef.current.cards = cards;
-    }
-  }, [cards]);
-
-  return (
-    <>
-      <main>
-        <poke-cards-list ref={cardListRef}></poke-cards-list>
-      </main>
-    </>
-  );
+	return (
+		<>
+			<main>
+				<poke-cards-list ref={cardListRef} />
+			</main>
+		</>
+	);
 }
 
 export default App;
