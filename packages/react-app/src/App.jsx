@@ -41,7 +41,7 @@ function App() {
 	const handleFilter = async (event) => {
 		const query = event.detail;
 		try {
-			const filteredCards = cardBloc.filterByName(query); // Cambiar a filterByName
+			const filteredCards = cardBloc.filterByName(query);
 			setCards(filteredCards);
 		} catch (error) {
 			console.error("Error filtering cards:", error);

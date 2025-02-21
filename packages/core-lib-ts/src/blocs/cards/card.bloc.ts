@@ -13,7 +13,8 @@ class CardBloc {
 	}
 
 	filterByName(name: string): Card[] {
-		return FilterCardsByNameUseCase.run(name);
+		const { cards } = cardStore.getState();
+		return FilterCardsByNameUseCase.run(cards, name);
 	}
 }
 
