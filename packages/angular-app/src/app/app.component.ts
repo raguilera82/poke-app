@@ -5,7 +5,7 @@ import { cardBloc } from "../../../core-lib-ts/src/blocs/cards/card.bloc";
 import type { CardType } from "../../../core-lib-ts/src/blocs/cards/card.model";
 import { notiBloc } from "../../../core-lib-ts/src/blocs/notifications/noti.bloc";
 import "../../../core-ui/src/components/cards-list.element.js";
-import "../../../core-ui/src/my-element.js";
+import "../../../core-ui/src/components/text-input.element.js";
 
 @Component({
 	selector: "app-root",
@@ -27,5 +27,10 @@ export class AppComponent implements OnInit {
 		});
 
 		notiBloc.showInfo("Se mostrará?");
+	}
+
+	filterByName(e) {
+		const name = e.target.value;
+		this.cards = cardBloc.filterByName(name);
 	}
 }

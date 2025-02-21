@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { cardBloc } from "../../core-lib-ts/src/blocs/cards/card.bloc";
 import { notiBloc } from "../../core-lib-ts/src/blocs/notifications/noti.bloc";
 import "../../core-ui/src/components/cards-list.element.js";
+import "../../core-ui/src/components/text-input.element.js";
 import "./App.css";
 
 function App() {
@@ -29,9 +30,29 @@ function App() {
 		}
 	}, [cards]);
 
+	useEffect(() => {
+		const textInput = document.querySelector("poke-text-input");
+		if (textInput) {
+			textInput.addEventListener("on-submit", handleFilter);
+			return () => textInput.removeEventListener("on-submit", handleFilter);
+		}
+	}, []);
+
+	const handleFilter = async (event) => {
+		const query = event.detail;
+		try {
+			const filteredCards = cardBloc.filterByName(query); // Cambiar a filterByName
+			setCards(filteredCards);
+		} catch (error) {
+			console.error("Error filtering cards:", error);
+		}
+	};
+
 	return (
 		<>
 			<main>
+				<h1>React Pokemóns</h1>
+				<poke-text-input buttonText="Filter" />
 				<poke-cards-list ref={cardListRef} />
 			</main>
 		</>
