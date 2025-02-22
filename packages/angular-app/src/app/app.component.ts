@@ -33,4 +33,9 @@ export class AppComponent implements OnInit {
 		const name = e.target.value;
 		this.cards = cardBloc.filterByName(name);
 	}
+
+	filterByHp(e) {
+		const hp = e.target.value;
+		this.cards = cardBloc.filterByHp(hp);
+	}
 }

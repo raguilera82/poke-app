@@ -14,6 +14,13 @@ const filterByName = ref((event) => {
 	}
 });
 
+const filterByHp = ref((event) => {
+	const filteredCards = cardBloc.filterByHp(event.detail);
+	if (cardListRef.value) {
+		cardListRef.value.cards = filteredCards;
+	}
+});
+
 onMounted(async () => {
 	notiBloc.store.subscribe((state) => {
 		console.log(JSON.stringify(state));
@@ -31,7 +38,8 @@ onMounted(async () => {
 
 <template>
   <h1>Vue Pokemóns</h1>
-  <poke-text-input buttonText="Filter" @on-submit="filterByName"></poke-text-input>
+  <poke-text-input buttonText="Filter by name" @on-submit="filterByName"></poke-text-input>
+  <poke-text-input buttonText="Filter by HP" @on-submit="filterByHp"></poke-text-input>
   <poke-cards-list ref="cardListRef"></poke-cards-list>
 </template>
 

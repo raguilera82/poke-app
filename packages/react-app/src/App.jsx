@@ -31,20 +31,41 @@ function App() {
 	}, [cards]);
 
 	useEffect(() => {
-		const textInput = document.querySelector("poke-text-input");
-		if (textInput) {
-			textInput.addEventListener("on-submit", handleFilter);
-			return () => textInput.removeEventListener("on-submit", handleFilter);
+		const nameInput = document.querySelector('[data-filter="name"]');
+
+		if (nameInput) {
+			nameInput.addEventListener("on-submit", handleNameFilter);
+			return () => nameInput.removeEventListener("on-submit", handleNameFilter);
+		}
+
+	}, []);
+
+	useEffect(() => {
+		const hpInput = document.querySelector('[data-filter="hp"]');
+
+		if (hpInput) {
+			hpInput.addEventListener("on-submit", handleHpFilter);
+			return () => hpInput.removeEventListener("on-submit", handleHpFilter);
 		}
 	}, []);
 
-	const handleFilter = async (event) => {
+	const handleNameFilter = async (event) => {
 		const query = event.detail;
 		try {
 			const filteredCards = cardBloc.filterByName(query);
 			setCards(filteredCards);
 		} catch (error) {
-			console.error("Error filtering cards:", error);
+			console.error("Error filtering cards by name:", error);
+		}
+	};
+
+	const handleHpFilter = async (event) => {
+		const query = event.detail;
+		try {
+			const filteredCards = cardBloc.filterByHp(query);
+			setCards(filteredCards);
+		} catch (error) {
+			console.error("Error filtering cards by HP:", error);
 		}
 	};
 
@@ -52,7 +73,8 @@ function App() {
 		<>
 			<main>
 				<h1>React Pokemóns</h1>
-				<poke-text-input buttonText="Filter" />
+				<poke-text-input data-filter="name" buttonText="Filter by name" />
+				<poke-text-input data-filter="hp" buttonText="Filter by HP" />
 				<poke-cards-list ref={cardListRef} />
 			</main>
 		</>

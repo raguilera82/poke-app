@@ -85,3 +85,46 @@ describe("CardBloc - filter by name", () => {
 		});
 	});
 });
+
+describe("CardBloc - filter by hp", () => {
+	const mockCards: Card[] = [
+		new Card({
+			idCard: "1",
+			nameCard: "Pikachu",
+			supertype: "Pokemon",
+			level: "1",
+			hp: "60",
+			imageCard: "pikachu.jpg",
+		}),
+		new Card({
+			idCard: "2",
+			nameCard: "Charizard",
+			supertype: "Pokemon",
+			level: "1",
+			hp: "120",
+			imageCard: "charizard.jpg",
+		}),
+	];
+
+	beforeEach(() => {
+		cardStore.setState({ cards: mockCards });
+	});
+
+	describe("filterByHp", () => {
+		it("should return all cards when hp is empty", () => {
+			const result = cardBloc.filterByHp("");
+			expect(result).toEqual(mockCards);
+		});
+
+		it("should return filtered cards by hp", () => {
+			const result = cardBloc.filterByHp("60");
+			expect(result).toHaveLength(1);
+			expect(result[0].nameCard).toBe("Pikachu");
+		});
+
+		it("should return empty array when no matches found", () => {
+			const result = cardBloc.filterByHp("100");
+			expect(result).toHaveLength(0);
+		});
+	});
+});
