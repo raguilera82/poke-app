@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, type OnInit } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { cardBloc } from "../../../core-lib-ts/src/blocs/cards/card.bloc";
-import type { CardType } from "../../../core-lib-ts/src/blocs/cards/card.model";
+import type { Card } from "../../../core-lib-ts/src/blocs/cards/card.model";
 import { notiBloc } from "../../../core-lib-ts/src/blocs/notifications/noti.bloc";
 import "../../../core-ui/src/components/cards-list.element.js";
 import "../../../core-ui/src/components/text-input.element.js";
@@ -17,7 +17,7 @@ import "../../../core-ui/src/components/text-input.element.js";
 })
 export class AppComponent implements OnInit {
 	title = "angular-app";
-	cards: CardType[] = [];
+	cards: Card[] = [];
 
 	async ngOnInit() {
 		this.cards = await cardBloc.getAllCards();

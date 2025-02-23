@@ -63,7 +63,7 @@ export class CardList extends LitElement {
 					(card) => html`
             <div class="card">
               <img src="${card.imageCard}" alt="${card.nameCard}" />
-              <p>${card.level}</p>
+              <p>${card.nameCard} - ${card.hp}</p>
             </div>
           `,
 				)}
