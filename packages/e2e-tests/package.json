@@ -1,19 +1,19 @@
 {
-  "name": "e2e-tests",
-  "version": "1.0.0",
-  "description": "E2E tests for all apps",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "test:angular": "playwright test --config=playwright.angular.config.ts",
-    "test:react": "playwright test --config=playwright.react.config.ts",
-    "test:vue": "playwright test --config=playwright.vue.config.ts",
-    "test:all": "playwright test",
-    "show-report": "playwright show-report"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.42.1",
-    "@types/node": "^20.11.24",
-    "typescript": "^5.3.3"
-  }
+	"name": "e2e-tests",
+	"version": "1.0.0",
+	"description": "E2E tests for all apps",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test:angular": "playwright test --config=playwright.angular.config.ts",
+		"test:react": "playwright test --config=playwright.react.config.ts",
+		"test:vue": "playwright test --config=playwright.vue.config.ts",
+		"test:all": "playwright test",
+		"show-report": "playwright show-report"
+	},
+	"devDependencies": {
+		"@playwright/test": "^1.42.1",
+		"@types/node": "^20.11.24",
+		"typescript": "^5.3.3"
+	}
 }

@@ -1,8 +1,8 @@
+import "@core-ui/components/cards-list.element.js";
+import "@core-ui/components/text-input.element.js";
+import { cardBloc } from "@core/blocs/cards/card.bloc";
+import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import { useEffect, useRef, useState } from "react";
-import { cardBloc } from "../../../core-lib-ts/src/blocs/cards/card.bloc";
-import { notiBloc } from "../../../core-lib-ts/src/blocs/notifications/noti.bloc";
-import "../../../core-ui/src/components/cards-list.element.js";
-import "../../../core-ui/src/components/text-input.element.js";
 
 function Home() {
 	const [cards, setCards] = useState([]);

@@ -1,36 +1,32 @@
-import { BaseBloc } from "../base.bloc";
+import { cardStore } from './card.store';
 import { CardsRepository } from "./cards.repository";
 
 /**
  * @typedef {Object} CardBlocState
- * @property {import("./card.model").CardType[]} cards
+ * @property {import("./card.model").Card[]} cards
  */
-class CardBloc extends BaseBloc {
+class CardBloc {
 	/**
 	 *
-	 * @returns {Promise<import("./card.model").CardType[]>}
+	 * @returns {Promise<import("./card.model").Card[]>}
 	 */
+
 	async getAllCards() {
-		const cardsCache = this.getState()?.cards;
+		const cardsCache = cardStore.getState()?.cards;
 		if (cardsCache) {
 			return cardsCache;
 		}
 		const cardsRepository = new CardsRepository();
 		const cards = await cardsRepository.getAllCards();
-		this.setState({ cards });
+		cardStore.setState({ cards });
 		return cards;
 	}
 
-	constructor() {
-		super("poke_cards_state");
+	filterByName(name) {
+		const { cards } = cardStore.getState();
+		return FilterCardsByNameUseCase.run(cards, name);
 	}
 
-	/**
-	 * @returns {CardBloc}
-	 */
-	static _getInstance() {
-		return new CardBloc();
-	}
 }
 
-export const cardBloc = CardBloc._getInstance();
+export const cardBloc = new CardBloc();

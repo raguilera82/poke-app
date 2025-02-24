@@ -1,3 +1,4 @@
+import path from "node:path";
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 
@@ -13,4 +14,10 @@ export default defineConfig({
 			},
 		}),
 	],
+	resolve: {
+		alias: {
+			"@core": path.resolve(__dirname, "./../../packages/core-lib-ts/src"),
+			"@core-ui": path.resolve(__dirname, "./../../packages/core-ui/src"),
+		},
+	},
 });
