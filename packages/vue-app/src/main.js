@@ -1,5 +1,5 @@
+import { configBloc } from "@core/blocs/config/config.bloc";
 import { createApp } from "vue";
-import { configBloc } from "../../core-lib-ts/src/blocs/config/config.bloc";
 import App from "./App.vue";
 import router from "./router";
 import "./style.css";

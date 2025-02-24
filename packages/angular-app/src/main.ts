@@ -1,5 +1,5 @@
 import { bootstrapApplication } from "@angular/platform-browser";
-import { configBloc } from "../../core-lib-ts/src/blocs/config/config.bloc";
+import { configBloc } from "@core/blocs/config/config.bloc";
 import { AppComponent } from "./app/app.component";
 import { appConfig } from "./app/app.config";
 

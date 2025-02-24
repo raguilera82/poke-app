@@ -1,5 +1,5 @@
 {
-	"name": "core-ui",
+	"name": "ui-lib",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",

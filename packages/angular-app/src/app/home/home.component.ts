@@ -1,10 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, type OnInit } from "@angular/core";
-import "@core-ui/components/cards-list.element.js";
-import "@core-ui/components/text-input.element.js";
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import type { Card } from "@core/blocs/cards/card.model";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import "@ui/components/cards-list.element.js";
+import "@ui/components/text-input.element.js";
 
 @Component({
 	selector: "app-home",

@@ -1,8 +1,8 @@
 <script setup>
-import "@core-ui/components/cards-list.element";
-import "@core-ui/components/text-input.element";
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import "@ui/components/cards-list.element";
+import "@ui/components/text-input.element";
 import { onMounted, ref } from "vue";
 
 const cardListRef = ref(null);

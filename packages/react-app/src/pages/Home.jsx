@@ -1,7 +1,7 @@
-import "@core-ui/components/cards-list.element.js";
-import "@core-ui/components/text-input.element.js";
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import "@ui/components/cards-list.element.js";
+import "@ui/components/text-input.element.js";
 import { useEffect, useRef, useState } from "react";
 
 function Home() {

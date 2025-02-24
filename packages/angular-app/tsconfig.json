@@ -23,7 +23,7 @@
 		"allowJs": true,
 		"paths": {
 			"@core/*": ["./../../packages/core-lib-ts/src/*"],
-			"@core-ui/*": ["./../../packages/core-ui/src/*"]
+			"@ui/*": ["./../../packages/ui-lib/src/*"]
 		}
 	},
 	"angularCompilerOptions": {

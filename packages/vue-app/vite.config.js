@@ -17,7 +17,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"@core": path.resolve(__dirname, "./../../packages/core-lib-ts/src"),
-			"@core-ui": path.resolve(__dirname, "./../../packages/core-ui/src"),
+			"@ui": path.resolve(__dirname, "./../../packages/ui-lib/src"),
 		},
 	},
 });

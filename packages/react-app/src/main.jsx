@@ -1,5 +1,5 @@
+import { configBloc } from "@core/blocs/config/config.bloc";
 import { createRoot } from "react-dom/client";
-import { configBloc } from "../../core-lib-ts/src/blocs/config/config.bloc";
 import App from "./App.jsx";
 import "./index.css";
 
