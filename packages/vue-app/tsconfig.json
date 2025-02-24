@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"strict": true,
+		"jsx": "preserve",
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"allowJs": true,
+		"checkJs": false,
+		"outDir": "./dist",
+		"paths": {
+			"@core/*": ["./../../packages/core-lib-ts/src/*"],
+			"@ui/*": ["./../../packages/ui-lib/src/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "src/**/*.vue"],
+	"exclude": ["node_modules", "dist"]
+}

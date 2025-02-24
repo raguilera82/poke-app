@@ -10,10 +10,6 @@ class NotiBloc {
 	get noti(): NotiType {
 		return notiStore.getState().noti;
 	}
-
-	get store(): typeof notiStore {
-		return notiStore;
-	}
 }
 
 export const notiBloc = new NotiBloc();

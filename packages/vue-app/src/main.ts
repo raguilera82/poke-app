@@ -1,7 +1,7 @@
 import { configBloc } from "@core/blocs/config/config.bloc";
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
+import router from "./router/index";
 import "./style.css";
 
 async function loadConfigAndRenderApp() {

@@ -1,13 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import {
+	type NotiStoreState,
+	notiStore,
+} from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element";
 import "@ui/components/text-input.element";
 import { onMounted, ref } from "vue";
 
-const cardListRef = ref(null);
+import type { CardList } from "@ui/components/cards-list.element";
+import type { Ref } from "vue";
 
-const filterByName = (event) => {
+const cardListRef: Ref<CardList | null> = ref(null);
+
+const filterByName = (event: { detail: string }) => {
 	const filteredCards = cardBloc.filterByName(event.detail);
 	if (cardListRef.value) {
 		cardListRef.value.cards = filteredCards;
@@ -15,8 +22,8 @@ const filterByName = (event) => {
 };
 
 onMounted(async () => {
-	notiBloc.store.subscribe((state) => {
-		console.log(JSON.stringify(state));
+	notiStore.subscribe((state: NotiStoreState) => {
+		console.log(JSON.stringify(state.noti));
 	});
 
 	notiBloc.showInfo("Se mostrará?");

@@ -12,12 +12,6 @@ export default defineConfig({
 						tag.startsWith("poke-") || tag.startsWith("ui-"),
 				},
 			},
-			babel: {
-				plugins: [
-					["@babel/plugin-proposal-decorators", { legacy: true }],
-					["@babel/plugin-proposal-class-properties", { legacy: true }],
-				],
-			},
 		}),
 	],
 	resolve: {

@@ -7,5 +7,5 @@ export type ConfigBlocState = {
 
 export const configStore = createValtioStore<ConfigBlocState>(
 	{ config: null },
-	"poke_cards_state",
+	"poke_config_state",
 );

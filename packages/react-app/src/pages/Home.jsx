@@ -3,6 +3,7 @@ import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 import { useEffect, useRef, useState } from "react";
+import { notiStore } from "../../../core-lib/src/blocs/notifications/noti.store";
 
 function Home() {
 	const [cards, setCards] = useState([]);
@@ -14,7 +15,7 @@ function Home() {
 				const allCards = await cardBloc.getAllCards();
 				setCards(allCards);
 				notiBloc.showInfo("Cards fetched successfully");
-				notiBloc.store.subscribe((state) => console.log(state));
+				notiStore.subscribe((state) => console.log(state));
 			} catch (error) {
 				console.error("Error fetching cards:", error);
 			}

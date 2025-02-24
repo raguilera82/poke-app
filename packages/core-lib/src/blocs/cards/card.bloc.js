@@ -1,4 +1,3 @@
-import { withCache } from '../../shared/decorators/cache.decorator';
 import { cardStore } from './card.store';
 import { FilterCardsByNameUseCase } from './usecases/filter-cards-by-name.usecase';
 import { GetAllCardsUseCase } from './usecases/get-all-cards.usecase';
@@ -11,7 +10,8 @@ class CardBloc {
     /**
      * @returns {Promise<import("./card.model").Card[]>}
      */
-    @withCache('pokemon_cards', 60)
+
+    //@withCache('pokemon_cards', 60)
     async getAllCards() {
         const cards = await GetAllCardsUseCase.run();
         cardStore.setState({ cards });
