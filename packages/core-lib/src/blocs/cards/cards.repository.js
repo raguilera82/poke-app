@@ -9,6 +9,7 @@ export class CardsRepository {
 	async getAllCards() {
 		try {
 			const response = await axios.get(
+				
 				`${configBloc.config.apiBaseUrl}/v2/cards`,
 			);
 
@@ -19,6 +20,7 @@ export class CardsRepository {
 					supertype: card.supertype,
 					level: card.level,
 					hp: card.hp,
+					imageCard: card.images.large,
 				});
 			});
 

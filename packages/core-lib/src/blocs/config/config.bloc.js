@@ -1,10 +1,6 @@
-import { BaseBloc } from "../base.bloc";
+import { configStore } from "./config.store";
 
-/**
- * @typedef {Object} ConfigBlocState
- * @property {import('./config.model').ConfigType} config
- */
-class ConfigBloc extends BaseBloc {
+class ConfigBloc {
 	/**
 	 *
 	 * @returns {Promise<void>}
@@ -17,7 +13,7 @@ class ConfigBloc extends BaseBloc {
 			}
 			const config = await response.json();
 
-			this.setState({ config });
+			configStore.setState({ config });
 		} catch (error) {
 			console.error("Error cargando la configuración:", error);
 		}
@@ -27,19 +23,8 @@ class ConfigBloc extends BaseBloc {
 	 * @returns {import("./config.model").ConfigType}
 	 */
 	get config() {
-		return this.state.config;
-	}
-
-	constructor() {
-		super("poke_config_state");
-	}
-
-	/**
-	 * @returns {ConfigBloc}
-	 */
-	static _getInstance() {
-		return new ConfigBloc();
+		return configStore.getState()?.config;
 	}
 }
 
-export const configBloc = ConfigBloc._getInstance();
+export const configBloc = new ConfigBloc();

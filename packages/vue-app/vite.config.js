@@ -9,8 +9,14 @@ export default defineConfig({
 			template: {
 				compilerOptions: {
 					isCustomElement: (tag) =>
-						tag.startsWith("my-") || tag.startsWith("ui-"),
+						tag.startsWith("poke-") || tag.startsWith("ui-"),
 				},
+			},
+			babel: {
+				plugins: [
+					["@babel/plugin-proposal-decorators", { legacy: true }],
+					["@babel/plugin-proposal-class-properties", { legacy: true }],
+				],
 			},
 		}),
 	],

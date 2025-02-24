@@ -22,7 +22,7 @@
 		"lib": ["ES2022", "dom"],
 		"allowJs": true,
 		"paths": {
-			"@core/*": ["./../../packages/core-lib-ts/src/*"],
+			"@core/*": ["./../../packages/core-lib/src/*"],
 			"@ui/*": ["./../../packages/ui-lib/src/*"]
 		}
 	},

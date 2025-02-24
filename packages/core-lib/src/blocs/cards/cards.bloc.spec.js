@@ -1,8 +1,9 @@
 import axios from "axios";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import cards200 from "../../../fixtures/cards-200.json";
 import { configBloc } from "../config/config.bloc";
 import { cardBloc } from "./card.bloc";
+import { cardStore } from "./card.store";
 
 vi.mock("axios");
 
@@ -18,9 +19,17 @@ global.fetch = vi.fn(() =>
 );
 
 describe("Cards BLoC", () => {
+
+	beforeEach(() => {
+		cardStore.setState({ cards: null });
+		vi.clearAllMocks();
+	});
+
 	it("should get all cards", async () => {
 		await configBloc.loadConfig();
 		expect(fetch).toHaveBeenCalledWith("/config.json");
+
+		cardStore.setState({ cards: null });
 
 		vi.mocked(axios, true).get.mockResolvedValueOnce(cards200);
 		const cards = await cardBloc.getAllCards();
