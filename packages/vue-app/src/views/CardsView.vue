@@ -2,13 +2,9 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { type CardBlocState, cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import {
-	type NotiStoreState,
-	notiStore,
-} from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element";
 import "@ui/components/text-input.element";
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 import type { CardList } from "@ui/components/cards-list.element";
 import type { Ref } from "vue";
@@ -20,23 +16,22 @@ const filterByName = (event: { detail: string }) => {
 };
 
 onMounted(async () => {
-	cardStore.subscribe((state: CardBlocState) => {
+	const unsubscribeCardStore = cardStore.subscribe((state: CardBlocState) => {
 		if (cardListRef.value) {
 			cardListRef.value.cards = state.filteredCards;
 		}
 	});
 
-	notiStore.subscribe((state: NotiStoreState) => {
-		console.log(JSON.stringify(state.noti));
-	});
-
-	notiBloc.showInfo("Se mostrará?");
-
 	const cards = await cardBloc.getAllCards();
+	notiBloc.showInfo("Cards loaded");
 
 	if (cardListRef.value) {
 		cardListRef.value.cards = cards;
 	}
+
+	onUnmounted(() => {
+		unsubscribeCardStore();
+	});
 });
 </script>
 

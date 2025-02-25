@@ -1,7 +1,6 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import { notiStore } from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 import { useEffect, useRef, useState } from "react";
@@ -11,9 +10,13 @@ export function CardsView() {
 	const cardListRef = useRef(null);
 
 	useEffect(() => {
-		cardStore.subscribe((state) => {
+		const unsubscribe = cardStore.subscribe((state) => {
 			setCards(state.filteredCards);
 		});
+		return () => {
+			console.log("Unsubscribing from cardStore");
+			unsubscribe();
+		};
 	}, []);
 
 	useEffect(() => {
@@ -22,7 +25,6 @@ export function CardsView() {
 				const allCards = await cardBloc.getAllCards();
 				setCards(allCards);
 				notiBloc.showInfo("Cards fetched successfully");
-				notiStore.subscribe((state) => console.log(state));
 			} catch (error) {
 				console.error("Error fetching cards:", error);
 			}

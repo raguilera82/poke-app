@@ -18,7 +18,9 @@ export function createValtioStore<T extends object>(
 			Object.assign(state, newState);
 		},
 		getState: () => state,
-		subscribe: (callback: (state: T) => void) =>
-			subscribe(state, () => callback(state)),
+		subscribe: (callback: (state: T) => void) => {
+			const unsubscribe = subscribe(state, () => callback(state));
+			return unsubscribe;
+		},
 	};
 }

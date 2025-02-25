@@ -1,10 +1,14 @@
 import { CommonModule } from "@angular/common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, type OnInit } from "@angular/core";
+import {
+	CUSTOM_ELEMENTS_SCHEMA,
+	Component,
+	type OnDestroy,
+	type OnInit,
+} from "@angular/core";
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import type { Card } from "@core/blocs/cards/card.model";
 import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import { notiStore } from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 
@@ -16,21 +20,21 @@ import "@ui/components/text-input.element.js";
 	styleUrl: "./cards.view.css",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CardsView implements OnInit {
+export class CardsView implements OnInit, OnDestroy {
 	cards: Card[] = [];
+	private unsubscribeCardStore: () => void;
 
 	async ngOnInit() {
 		this.cards = await cardBloc.getAllCards();
+		notiBloc.showInfo("Cards Loaded");
 
-		notiStore.subscribe((state) => {
-			console.log(JSON.stringify(state));
-		});
-
-		notiBloc.showInfo("Se mostrará?");
-
-		cardStore.subscribe((state) => {
+		this.unsubscribeCardStore = cardStore.subscribe((state) => {
 			this.cards = state.filteredCards;
 		});
+	}
+
+	ngOnDestroy() {
+		this.unsubscribeCardStore();
 	}
 
 	filterByName(e) {
