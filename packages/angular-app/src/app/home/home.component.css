@@ -1,0 +1,19 @@
+.filters {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.reset-button {
+	padding: 0.5rem 1rem;
+	background-color: #ff3e3e;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.reset-button:hover {
+	background-color: #ff2525;
+}

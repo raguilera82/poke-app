@@ -1,5 +1,9 @@
 <main class="main">
   <h1>Angular Pokemóns</h1>
-  <poke-text-input buttonText="Filter" (on-submit)="filterByName($event)"></poke-text-input>
+  <div class="filters">
+    <poke-text-input #pokeInput buttonText="Filter by name" (on-submit)="filterByName($event)"></poke-text-input>
+    <poke-text-input #pokeInput buttonText="Filter by HP" (on-submit)="filterByHP($event)" type="number"></poke-text-input>
+    <button class="reset-button" (click)="resetFilters()">Reset Filters</button>
+  </div>
   <poke-cards-list [cards]="cards"></poke-cards-list>
 </main>

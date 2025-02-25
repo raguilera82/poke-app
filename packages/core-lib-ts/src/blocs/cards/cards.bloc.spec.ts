@@ -85,3 +85,64 @@ describe("CardBloc - filter by name", () => {
 		});
 	});
 });
+
+describe("CardBloc - filter by HP", () => {
+	const mockCards: Card[] = [
+		new Card({
+			idCard: "1",
+			nameCard: "Pikachu",
+			supertype: "Pokemon",
+			level: "1",
+			hp: "60",
+			imageCard: "pikachu.jpg",
+		}),
+		new Card({
+			idCard: "2",
+			nameCard: "Charizard",
+			supertype: "Pokemon",
+			level: "1",
+			hp: "120",
+			imageCard: "charizard.jpg",
+		}),
+		new Card({
+			idCard: "3",
+			nameCard: "Weedle",
+			supertype: "Pokemon",
+			level: "1",
+			hp: "30",
+			imageCard: "weedle.jpg",
+		}),
+	];
+
+	beforeEach(() => {
+		cardStore.setState({ cards: mockCards });
+	});
+
+	describe("filterByHP", () => {
+		it("should return all cards when minHP is 0 or negative", () => {
+			expect(cardBloc.filterByHP(0)).toEqual(mockCards);
+			expect(cardBloc.filterByHP(-10)).toEqual(mockCards);
+		});
+
+		it("should return cards with HP greater than or equal to minHP", () => {
+			const result = cardBloc.filterByHP(100);
+			expect(result).toHaveLength(1);
+			expect(result[0].nameCard).toBe("Charizard");
+			expect(result[0].hp).toBe("120");
+		});
+
+		it("should return empty array when no cards meet HP criteria", () => {
+			const result = cardBloc.filterByHP(150);
+			expect(result).toHaveLength(0);
+		});
+
+		it("should handle cards with multiple HP values", () => {
+			const result = cardBloc.filterByHP(50);
+			expect(result).toHaveLength(2);
+			expect(result.map((card) => card.nameCard)).toEqual([
+				"Pikachu",
+				"Charizard",
+			]);
+		});
+	});
+});
