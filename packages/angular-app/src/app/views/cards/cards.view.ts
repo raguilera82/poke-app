@@ -9,14 +9,14 @@ import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 
 @Component({
-	selector: "app-home",
+	selector: "cards-view",
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: "./home.component.html",
-	styleUrl: "./home.component.css",
+	templateUrl: "./cards.view.html",
+	styleUrl: "./cards.view.css",
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomeComponent implements OnInit {
+export class CardsView implements OnInit {
 	cards: Card[] = [];
 
 	async ngOnInit() {
