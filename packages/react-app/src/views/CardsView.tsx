@@ -24,7 +24,7 @@ export function CardsView() {
 			try {
 				const allCards = await cardBloc.getAllCards();
 				setCards(allCards);
-				notiBloc.showInfo("Cards fetched successfully");
+				notiBloc.showInfo("Cards loaded");
 			} catch (error) {
 				console.error("Error fetching cards:", error);
 			}
