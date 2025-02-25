@@ -1,49 +1,9 @@
 <script setup lang="ts">
-import { cardBloc } from "@core/blocs/cards/card.bloc";
-import { type CardBlocState, cardStore } from "@core/blocs/cards/card.store";
-import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import {
-	type NotiStoreState,
-	notiStore,
-} from "@core/blocs/notifications/noti.store";
-import "@ui/components/cards-list.element";
-import "@ui/components/text-input.element";
-import { onMounted, ref } from "vue";
-
-import type { CardList } from "@ui/components/cards-list.element";
-import type { Ref } from "vue";
-
-const cardListRef: Ref<CardList | null> = ref(null);
-
-const filterByName = (event: { detail: string }) => {
-	cardBloc.filterByName(event.detail);
-};
-
-onMounted(async () => {
-	cardStore.subscribe((state: CardBlocState) => {
-		if (cardListRef.value) {
-			cardListRef.value.cards = state.filteredCards;
-		}
-	});
-
-	notiStore.subscribe((state: NotiStoreState) => {
-		console.log(JSON.stringify(state.noti));
-	});
-
-	notiBloc.showInfo("Se mostrará?");
-
-	const cards = await cardBloc.getAllCards();
-
-	if (cardListRef.value) {
-		cardListRef.value.cards = cards;
-	}
-});
+import CardsView from "../views/CardsView.vue";
 </script>
 
 <template>
   <main>
-    <h1>Vue Pokemóns</h1>
-    <poke-text-input buttonText="Filter" @on-submit="filterByName"></poke-text-input>
-    <poke-cards-list ref="cardListRef"></poke-cards-list>
+    <CardsView />
   </main>
 </template>
