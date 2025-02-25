@@ -4,13 +4,7 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [
-		react({
-			babel: {
-				plugins: [["@babel/plugin-proposal-decorators", { legacy: true }]],
-			},
-		}),
-	],
+	plugins: [react()],
 	resolve: {
 		alias: {
 			"@core": path.resolve(__dirname, "./../../packages/core-lib-ts/src"),

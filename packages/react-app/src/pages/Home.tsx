@@ -1,9 +1,9 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import { notiStore } from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 import { useEffect, useRef, useState } from "react";
-import { notiStore } from "../../../core-lib/src/blocs/notifications/noti.store";
 
 function Home() {
 	const [cards, setCards] = useState([]);
@@ -38,7 +38,7 @@ function Home() {
 		}
 	}, []);
 
-	const handleFilter = async (event) => {
+	const handleFilter = async (event: CustomEvent<string>) => {
 		const query = event.detail;
 		try {
 			const filteredCards = cardBloc.filterByName(query);
