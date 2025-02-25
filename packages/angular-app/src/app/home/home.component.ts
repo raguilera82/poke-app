@@ -2,7 +2,9 @@ import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA, Component, type OnInit } from "@angular/core";
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import type { Card } from "@core/blocs/cards/card.model";
+import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import { notiStore } from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 
@@ -20,15 +22,19 @@ export class HomeComponent implements OnInit {
 	async ngOnInit() {
 		this.cards = await cardBloc.getAllCards();
 
-		notiBloc.store.subscribe((state) => {
+		notiStore.subscribe((state) => {
 			console.log(JSON.stringify(state));
 		});
 
 		notiBloc.showInfo("Se mostrará?");
+
+		cardStore.subscribe((state) => {
+			this.cards = state.filteredCards;
+		});
 	}
 
 	filterByName(e) {
 		const name = e.target.value;
-		this.cards = cardBloc.filterByName(name);
+		cardBloc.filterByName(name);
 	}
 }

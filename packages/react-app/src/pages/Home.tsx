@@ -1,4 +1,5 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
+import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import { notiStore } from "@core/blocs/notifications/noti.store";
 import "@ui/components/cards-list.element.js";
@@ -8,6 +9,12 @@ import { useEffect, useRef, useState } from "react";
 function Home() {
 	const [cards, setCards] = useState([]);
 	const cardListRef = useRef(null);
+
+	useEffect(() => {
+		cardStore.subscribe((state) => {
+			setCards(state.filteredCards);
+		});
+	}, []);
 
 	useEffect(() => {
 		const fetchCards = async () => {
@@ -41,8 +48,7 @@ function Home() {
 	const handleFilter = async (event: CustomEvent<string>) => {
 		const query = event.detail;
 		try {
-			const filteredCards = cardBloc.filterByName(query);
-			setCards(filteredCards);
+			cardBloc.filterByName(query);
 		} catch (error) {
 			console.error("Error filtering cards:", error);
 		}

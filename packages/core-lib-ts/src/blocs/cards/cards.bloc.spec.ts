@@ -58,28 +58,32 @@ describe("CardBloc - filter by name", () => {
 	];
 
 	beforeEach(() => {
-		cardStore.setState({ cards: mockCards });
+		cardStore.setState({ cards: mockCards, filteredCards: mockCards });
 	});
 
 	describe("filterByName", () => {
 		it("should return all cards when name is empty", () => {
-			const result = cardBloc.filterByName("");
+			cardBloc.filterByName("");
+			const result = cardStore.getState().filteredCards;
 			expect(result).toEqual(mockCards);
 		});
 
 		it("should return filtered cards by name case insensitive", () => {
-			const result = cardBloc.filterByName("pika");
+			cardBloc.filterByName("pika");
+			const result = cardStore.getState().filteredCards;
 			expect(result).toHaveLength(1);
 			expect(result[0].nameCard).toBe("Pikachu");
 		});
 
 		it("should return empty array when no matches found", () => {
-			const result = cardBloc.filterByName("Mewtwo");
+			cardBloc.filterByName("Mewtwo");
+			const result = cardStore.getState().filteredCards;
 			expect(result).toHaveLength(0);
 		});
 
 		it("should handle case insensitive search", () => {
-			const result = cardBloc.filterByName("CHAR");
+			cardBloc.filterByName("CHAR");
+			const result = cardStore.getState().filteredCards;
 			expect(result).toHaveLength(1);
 			expect(result[0].nameCard).toBe("Charizard");
 		});

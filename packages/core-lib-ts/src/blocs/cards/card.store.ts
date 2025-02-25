@@ -3,9 +3,10 @@ import type { Card } from "./card.model";
 
 export type CardBlocState = {
 	cards: Card[];
+	filteredCards: Card[];
 };
 
 export const cardStore = createValtioStore<CardBlocState>(
-	{ cards: [] },
+	{ cards: [], filteredCards: [] },
 	"poke_cards_state",
 );

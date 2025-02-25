@@ -12,9 +12,10 @@ class CardBloc {
 		return cards;
 	}
 
-	filterByName(name: string): Card[] {
+	filterByName(name: string) {
 		const { cards } = cardStore.getState();
-		return FilterCardsByNameUseCase.run(cards, name);
+		const filteredCards = FilterCardsByNameUseCase.run(cards, name);
+		cardStore.setState({ filteredCards: filteredCards });
 	}
 }
 

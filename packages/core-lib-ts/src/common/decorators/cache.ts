@@ -16,8 +16,10 @@ export function Cache(
 				const isCacheValid =
 					Date.now() - parsedCache.cacheTimestamp < cacheExpirationMs;
 				if (isCacheValid) {
+					console.log("[Cache] hit");
 					return parsedCache.data;
 				}
+				console.log("[Cache] miss");
 				sessionStorage.removeItem(cacheKey);
 			}
 

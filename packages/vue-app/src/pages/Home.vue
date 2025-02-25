@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { cardBloc } from "@core/blocs/cards/card.bloc";
+import { type CardBlocState, cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import {
 	type NotiStoreState,
@@ -15,13 +16,16 @@ import type { Ref } from "vue";
 const cardListRef: Ref<CardList | null> = ref(null);
 
 const filterByName = (event: { detail: string }) => {
-	const filteredCards = cardBloc.filterByName(event.detail);
-	if (cardListRef.value) {
-		cardListRef.value.cards = filteredCards;
-	}
+	cardBloc.filterByName(event.detail);
 };
 
 onMounted(async () => {
+	cardStore.subscribe((state: CardBlocState) => {
+		if (cardListRef.value) {
+			cardListRef.value.cards = state.filteredCards;
+		}
+	});
+
 	notiStore.subscribe((state: NotiStoreState) => {
 		console.log(JSON.stringify(state.noti));
 	});
