@@ -58,3 +58,20 @@ function Home() {
 }
 
 export default Home;
+
+declare global {
+	namespace JSX {
+		interface IntrinsicElements {
+			"poke-text-input": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			> & {
+				buttonText?: string;
+			};
+			"poke-cards-list": React.DetailedHTMLProps<
+				React.HTMLAttributes<HTMLElement>,
+				HTMLElement
+			>;
+		}
+	}
+}
