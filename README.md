@@ -32,24 +32,25 @@ npm install
 ### Angular App
 ```bash
 cd packages/angular-app
-npm run start
+npm run start #port=9100
 ```
 
 ### React App
 ```bash
 cd packages/react-app
-npm run dev
+npm run dev #port=9101
 ```
 
 ### Vue App
 ```bash
 cd packages/vue-app
-npm run dev
+npm run dev #port=9102
 ```
 
 ## 🧪 Testing
 
 ### Running E2E Tests
+Note: All apps are running
 ```bash
 cd packages/e2e-tests
 npm run test:all      # Run tests for all apps

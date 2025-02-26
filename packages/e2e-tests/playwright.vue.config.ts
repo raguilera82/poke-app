@@ -5,6 +5,6 @@ export default defineConfig({
 	...baseConfig,
 	use: {
 		...baseConfig.use,
-		baseURL: "http://localhost:5174", // Vite default port for Vue
+		baseURL: "http://localhost:9102",
 	},
 });

@@ -5,6 +5,6 @@ export default defineConfig({
 	...baseConfig,
 	use: {
 		...baseConfig.use,
-		baseURL: "http://localhost:4200", // Angular default port
+		baseURL: "http://localhost:9100",
 	},
 });

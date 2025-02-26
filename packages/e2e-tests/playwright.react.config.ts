@@ -5,6 +5,6 @@ export default defineConfig({
 	...baseConfig,
 	use: {
 		...baseConfig.use,
-		baseURL: "http://localhost:5173", // Vite default port for React
+		baseURL: "http://localhost:9101",
 	},
 });
