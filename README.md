@@ -61,7 +61,7 @@ npm run show-report   # View test results
 
 ### Core Library Tests
 ```bash
-cd packages/core-lib
+cd packages/core-lib-ts
 npm run test
 ```
 
