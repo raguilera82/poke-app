@@ -18,7 +18,7 @@ const filterByName = (event: { detail: string }) => {
 onMounted(async () => {
 	const unsubscribeCardStore = cardStore.subscribe((state: CardBlocState) => {
 		if (cardListRef.value) {
-			cardListRef.value.cards = state.filteredCards;
+			cardListRef.value.cards = [...state.filteredCards];
 		}
 	});
 
@@ -26,7 +26,7 @@ onMounted(async () => {
 	notiBloc.showInfo("Cards loaded");
 
 	if (cardListRef.value) {
-		cardListRef.value.cards = cards;
+		cardListRef.value.cards = [...cards];
 	}
 
 	onUnmounted(() => {
@@ -36,7 +36,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <h1>Vue Pokemóns</h1>
-    <poke-text-input buttonText="Filter" @on-submit="filterByName"></poke-text-input>
-    <poke-cards-list ref="cardListRef"></poke-cards-list>
+	<h1>Vue Pokemóns</h1>
+	<poke-text-input buttonText="Filter" @on-submit="filterByName"></poke-text-input>
+	<poke-cards-list ref="cardListRef"></poke-cards-list>
 </template>

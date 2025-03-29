@@ -38,7 +38,7 @@ describe("Cards BLoC - Get all cards", () => {
 });
 
 describe("CardBloc - filter by name", () => {
-	const mockCards: Card[] = [
+	const mockCards: ReadonlyArray<Card> = [
 		new Card({
 			idCard: "1",
 			nameCard: "Pikachu",

@@ -1,4 +1,5 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
+import { Card } from "@core/blocs/cards/card.model";
 import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import "@ui/components/cards-list.element.js";
@@ -6,7 +7,7 @@ import "@ui/components/text-input.element.js";
 import { useEffect, useRef, useState } from "react";
 
 export function CardsView() {
-	const [cards, setCards] = useState([]);
+	const [cards, setCards] = useState<ReadonlyArray<Card>>([]);
 	const cardListRef = useRef(null);
 
 	useEffect(() => {

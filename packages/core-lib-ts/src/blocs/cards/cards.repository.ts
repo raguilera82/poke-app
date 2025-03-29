@@ -4,7 +4,7 @@ import type { CardsPaginateDTO, Daum } from "./card.dto";
 import { Card } from "./card.model";
 
 export class CardsRepository {
-	async getAllCards(): Promise<Card[]> {
+	async getAllCards(): Promise<ReadonlyArray<Card>> {
 		const response = await axios.get<CardsPaginateDTO>(
 			`${configBloc.config.apiBaseUrl}/v2/cards`,
 		);

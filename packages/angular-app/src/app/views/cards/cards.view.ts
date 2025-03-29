@@ -21,7 +21,7 @@ import "@ui/components/text-input.element.js";
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CardsView implements OnInit, OnDestroy {
-	cards: Card[] = [];
+	cards: ReadonlyArray<Card> = [];
 	private unsubscribeCardStore: () => void;
 
 	async ngOnInit() {

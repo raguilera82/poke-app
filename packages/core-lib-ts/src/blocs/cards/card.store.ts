@@ -2,8 +2,8 @@ import { createValtioStore } from "../store";
 import type { Card } from "./card.model";
 
 export type CardBlocState = {
-	cards: Card[];
-	filteredCards: Card[];
+	cards: ReadonlyArray<Card>;
+	filteredCards: ReadonlyArray<Card>;
 };
 
 export const cardStore = createValtioStore<CardBlocState>(

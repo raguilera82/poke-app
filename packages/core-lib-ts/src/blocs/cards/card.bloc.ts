@@ -6,7 +6,7 @@ import { GetAllCardsUseCase } from "./usecases/get-all-cards.usecase";
 
 class CardBloc {
 	@Cache("poke_cards_cache")
-	async getAllCards(): Promise<Card[]> {
+	async getAllCards(): Promise<ReadonlyArray<Card>> {
 		const cards = await GetAllCardsUseCase.run();
 		cardStore.setState({ cards });
 		return cards;

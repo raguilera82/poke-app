@@ -1,21 +1,21 @@
 import { CardNameTooLongError } from "../../errors/card-name-too-long.error";
 
-type CardType = {
+type CardType = Readonly<{
 	idCard: string;
 	nameCard: string;
 	supertype: string;
 	level: string;
 	hp: string;
 	imageCard: string;
-};
+}>;
 
 export class Card {
-	idCard: string;
-	nameCard: string;
-	supertype: string;
-	level: string;
-	hp: string;
-	imageCard: string;
+	readonly idCard: string;
+	readonly nameCard: string;
+	readonly supertype: string;
+	readonly level: string;
+	readonly hp: string;
+	readonly imageCard: string;
 
 	constructor(card: CardType) {
 		this.idCard = card.idCard;

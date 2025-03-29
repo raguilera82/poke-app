@@ -1,4 +1,4 @@
-import { proxy, subscribe } from "valtio";
+import { proxy, subscribe } from "valtio/vanilla";
 
 /**
  * Creates a Valtio store with persistence
@@ -26,7 +26,6 @@ export function createValtioStore(initialState, storageKey) {
       Object.assign(state, newState);
     },
     getState: () => state,
-    subscribe: (callback) =>
-      subscribe(state, () => callback(state)),
+    subscribe: (callback) => subscribe(state, () => callback(state)),
   };
 }

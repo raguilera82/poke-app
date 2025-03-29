@@ -13,7 +13,7 @@
 		"vitest": "^2.0.5"
 	},
 	"dependencies": {
-		"valtio": "^1.13.2",
-		"valtio-persist": "^1.0.2"
+		"immer": "^10.1.1",
+		"valtio": "^1.13.2"
 	}
 }
