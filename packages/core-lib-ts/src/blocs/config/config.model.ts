@@ -1,11 +1,11 @@
-export type ConfigType = {
+type ConfigType = {
 	apiBaseUrl: string;
 	apiKey: string;
 };
 
 export class Config {
-	apiBaseUrl: string;
-	apiKey: string;
+	readonly apiBaseUrl: string;
+	readonly apiKey: string;
 
 	constructor(config: ConfigType) {
 		this.apiBaseUrl = config.apiBaseUrl;

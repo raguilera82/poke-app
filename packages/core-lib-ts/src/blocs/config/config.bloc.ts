@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Config, type ConfigType } from "./config.model";
+import { Config } from "./config.model";
 import { configStore } from "./config.store";
 
 class ConfigBloc {
@@ -22,7 +22,7 @@ class ConfigBloc {
 		}
 	}
 
-	get config(): ConfigType {
+	get config(): Config {
 		return configStore.getState().config;
 	}
 }

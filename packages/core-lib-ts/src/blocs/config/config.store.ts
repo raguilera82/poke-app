@@ -1,8 +1,8 @@
 import { createValtioStore } from "../store";
-import type { ConfigType } from "./config.model";
+import type { Config } from "./config.model";
 
 export type ConfigBlocState = {
-	config: ConfigType;
+	config: Config | null;
 };
 
 export const configStore = createValtioStore<ConfigBlocState>(
