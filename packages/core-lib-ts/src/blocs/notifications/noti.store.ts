@@ -1,11 +1,17 @@
 import { createValtioStore } from "../store";
-import type { NotiType } from "./noti.model";
+import type { Noti } from "./noti.model";
 
 export type NotiStoreState = {
-	noti: NotiType;
+	noti: Noti | null;
+};
+
+const noti: Noti = null;
+
+const initialState: NotiStoreState = {
+	noti,
 };
 
 export const notiStore = createValtioStore<NotiStoreState>(
-	{ noti: null },
+	initialState,
 	"poke_noti_state",
 );

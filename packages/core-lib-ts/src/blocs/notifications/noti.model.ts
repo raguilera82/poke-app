@@ -1,11 +1,11 @@
-export type NotiType = {
+type NotiType = Readonly<{
 	msg: string;
 	type: string;
-};
+}>;
 
 export class Noti {
-	msg: string;
-	type: string;
+	readonly msg: string;
+	readonly type: string;
 
 	constructor(noti: NotiType) {
 		this.msg = noti.msg;

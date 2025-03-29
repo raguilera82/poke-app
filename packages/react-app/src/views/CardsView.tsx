@@ -1,5 +1,5 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
-import { Card } from "@core/blocs/cards/card.model";
+import type { Card } from "@core/blocs/cards/card.model";
 import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
 import "@ui/components/cards-list.element.js";

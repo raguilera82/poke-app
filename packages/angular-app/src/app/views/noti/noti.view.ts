@@ -4,7 +4,10 @@ import {
 	type OnDestroy,
 	type OnInit,
 } from "@angular/core";
-import { notiStore } from "@core/blocs/notifications/noti.store";
+import {
+	type NotiStoreState,
+	notiStore,
+} from "@core/blocs/notifications/noti.store";
 
 @Component({
 	selector: "app-noti-view",
@@ -25,7 +28,7 @@ export class NotiView implements OnInit, OnDestroy {
 	type = "INFO";
 
 	ngOnInit() {
-		this.unsubscribenotiStore = notiStore.subscribe((state) => {
+		this.unsubscribenotiStore = notiStore.subscribe((state: NotiStoreState) => {
 			if (state.noti) {
 				this.msg = state.noti.msg;
 				this.type = state.noti.type;
