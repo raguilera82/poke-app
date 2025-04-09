@@ -7,6 +7,7 @@ A collection of Pokemon-related applications built with different frameworks and
 - 🅰️ `angular-app`: Pokemon application built with Angular with TypeScript
 - ⚛️ `react-app`: Pokemon application built with React with TypeScript
 - 💚 `vue-app`: Pokemon application built with Vue.js with TypeScript
+- 🔥 `lit-app`: Pokemon application built with Lit with TypeScript
 - 🎨 `ui-lib`: Shared UI components using Lit with JavaScript
 - 🛠️ `core-lib`: Core JavaScript utilities and services (deprecated)
 - 📘 `core-lib-ts`: TypeScript version of core utilities with TypeScript
@@ -47,6 +48,12 @@ cd packages/vue-app
 npm run dev #port=9102
 ```
 
+### Lit App
+```bash
+cd packages/lit-app
+npm run dev #port=9103
+```
+
 ## 🧪 Testing
 
 ### Running E2E Tests
@@ -57,6 +64,7 @@ npm run test:all      # Run tests for all apps
 npm run test:angular  # Run Angular tests only
 npm run test:react    # Run React tests only
 npm run test:vue      # Run Vue tests only
+npm run test:lit      # Run Lit tests only
 npm run show-report   # View test results
 ```
 

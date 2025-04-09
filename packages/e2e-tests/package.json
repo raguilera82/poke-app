@@ -8,7 +8,8 @@
 		"test:angular": "playwright test --config=playwright.angular.config.ts",
 		"test:react": "playwright test --config=playwright.react.config.ts",
 		"test:vue": "playwright test --config=playwright.vue.config.ts",
-		"test:all": "npm run test:angular && npm run test:react && npm run test:vue",
+		"test:lit": "playwright test --config=playwright.lit.config.ts",
+		"test:all": "npm run test:angular && npm run test:react && npm run test:vue && npm run test:lit",
 		"show-report": "playwright show-report"
 	},
 	"devDependencies": {
