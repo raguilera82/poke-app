@@ -5,12 +5,10 @@ import { createRouter } from "./router";
 //import "./style.css";
 
 class App extends LitElement {
-
 	async connectedCallback() {
-    
 		await configBloc.loadConfig();
 		super.connectedCallback();
-	  }
+	}
 
 	async firstUpdated() {
 		await this.updateComplete;

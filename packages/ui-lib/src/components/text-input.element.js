@@ -35,7 +35,7 @@ export class TextInput extends LitElement {
 
       button {
         padding: 8px 16px;
-        background-color: #4CAF50;
+        background-color: #4caf50;
         color: white;
         border: none;
         border-radius: 4px;
@@ -71,6 +71,9 @@ export class TextInput extends LitElement {
 
 	render() {
 		return html`
+      <style>
+        ${this.constructor.styles.cssText}
+      </style>
       <div class="input-container">
         <input
           type="text"
@@ -82,6 +85,10 @@ export class TextInput extends LitElement {
         <button @click=${this.handleSubmit}>${this.buttonText}</button>
       </div>
     `;
+	}
+
+	createRenderRoot() {
+		return this;
 	}
 }
 

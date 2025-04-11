@@ -13,5 +13,3 @@ export function createRouter(outlet: Element): Router {
 
 	return router;
 }
-
-

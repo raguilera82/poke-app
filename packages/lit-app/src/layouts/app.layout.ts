@@ -2,7 +2,6 @@ import { LitElement, html } from "lit";
 import "./app.layout.style.css";
 
 class AppLayout extends LitElement {
-
 	render() {
 		return html`
       <div class="layout">
