@@ -37,6 +37,10 @@ export class CardList extends LitElement {
         object-fit: cover;
       }
 
+      .card__footer {
+         margin-left: 10px;
+      }
+
       .card:hover {
         transform: translateY(-5px);
       }
@@ -63,7 +67,7 @@ export class CardList extends LitElement {
 					(card) => html`
             <div class="card">
               <img src="${card.imageCard}" alt="${card.nameCard}" />
-              <p>${card.nameCard} - ${card.hp}</p>
+              <p class="card__footer">${card.nameCard} - ${card.hp}</p>
             </div>
           `,
 				)}
