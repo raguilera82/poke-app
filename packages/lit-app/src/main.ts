@@ -15,7 +15,6 @@ class App extends LitElement {
 		const appLayout = this.querySelector("app-layout") as LitElement;
 		await appLayout?.updateComplete;
 		const outlet = appLayout.querySelector("#outlet") as Element;
-		console.log(outlet, "outlet");
 		const router = createRouter(outlet);
 		router.setOutlet(outlet);
 	}

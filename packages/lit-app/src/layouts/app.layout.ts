@@ -1,9 +1,11 @@
 import { LitElement, html } from "lit";
+import "./../views/notification.view";
 import "./app.layout.style.css";
 
 class AppLayout extends LitElement {
 	render() {
 		return html`
+    <notification-view></notification-view>
       <div class="layout">
        
         <main class="layout-main">

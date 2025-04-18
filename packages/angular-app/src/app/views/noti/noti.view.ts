@@ -16,6 +16,7 @@ import {
       #notiElement
       [msg]="msg"
       [type]="type"
+	  [duration]="duration"
     ></poke-notification>
   `,
 	standalone: true,
@@ -26,18 +27,14 @@ export class NotiView implements OnInit, OnDestroy {
 	private unsubscribenotiStore: () => void;
 	msg = "";
 	type = "INFO";
+	duration = 3000;
 
 	ngOnInit() {
 		this.unsubscribenotiStore = notiStore.subscribe((state: NotiStoreState) => {
 			if (state.noti) {
 				this.msg = state.noti.msg;
 				this.type = state.noti.type;
-				const notiElement = document.querySelector("poke-notification");
-				if (notiElement) {
-					(notiElement as HTMLElement & { show: (msg: string) => void }).show(
-						this.msg,
-					);
-				}
+				this.duration = state.noti.duration;
 			}
 		});
 	}

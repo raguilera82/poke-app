@@ -2,8 +2,12 @@ import { Noti } from "./noti.model";
 import { notiStore } from "./noti.store";
 
 class NotiBloc {
-	showInfo(msg: string) {
-		const noti = new Noti({ msg, type: "INFO" });
+	showInfo(msg: string, duration = 3000): void {
+		const noti = new Noti({
+			msg,
+			type: "INFO",
+			duration,
+		});
 		notiStore.setState({ noti });
 	}
 

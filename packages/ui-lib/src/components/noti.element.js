@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 
-export class Notification extends LitElement {
+export class NotificationElement extends LitElement {
 	static get properties() {
 		return {
 			msg: { type: String },
@@ -15,7 +15,7 @@ export class Notification extends LitElement {
 		this.msg = "";
 		this.type = "INFO";
 		this.visible = false;
-		this.duration = 3000; // 3 segundos por defecto
+		this.duration = 3000;
 	}
 
 	static get styles() {
@@ -60,18 +60,22 @@ export class Notification extends LitElement {
     `;
 	}
 
-	show(message, duration) {
-		this.msg = message;
-		if (duration) this.duration = duration;
-		this.visible = true;
-
-		// Auto-ocultar después del tiempo especificado
-		setTimeout(() => {
-			this.hide();
-		}, this.duration);
+	updated(changedProps) {
+		if (changedProps.has("msg") && this.msg) {
+			this._show();
+		}
 	}
 
-	hide() {
+	_show() {
+		this.visible = true;
+		if (this.duration > 0) {
+			setTimeout(() => {
+				this._hide();
+			}, this.duration);
+		}
+	}
+
+	_hide() {
 		this.visible = false;
 	}
 
@@ -83,14 +87,23 @@ export class Notification extends LitElement {
 		};
 
 		return html`
-      <div class="${Object.entries(classes)
-				.filter(([, value]) => value)
-				.map(([key]) => key)
-				.join(" ")}">
+      <style>
+        ${this.constructor.styles.cssText}
+      </style>
+      <div
+        class="${Object.entries(classes)
+					.filter(([, value]) => value)
+					.map(([key]) => key)
+					.join(" ")}"
+      >
         ${this.msg}
       </div>
     `;
 	}
+
+	createRenderRoot() {
+		return this;
+	}
 }
 
-customElements.define("poke-notification", Notification);
+customElements.define("poke-notification", NotificationElement);

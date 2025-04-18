@@ -2,13 +2,15 @@ import { createValtioStore } from "../store";
 import type { Noti } from "./noti.model";
 
 export type NotiStoreState = {
-	noti: Noti | null;
+	noti: Noti;
 };
 
-const noti: Noti = null;
-
 const initialState: NotiStoreState = {
-	noti,
+	noti: {
+		msg: "",
+		type: "",
+		duration: 0,
+	},
 };
 
 export const notiStore = createValtioStore<NotiStoreState>(

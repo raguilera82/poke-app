@@ -9,6 +9,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 
 const msg = ref("");
 const type = ref("INFO");
+const duration = ref(3000);
 
 onMounted(() => {
 	const unsubscribe = notiStore.subscribe((state: NotiStoreState) => {
@@ -16,12 +17,7 @@ onMounted(() => {
 			const noti: Noti = state.noti;
 			msg.value = noti.msg;
 			type.value = noti.type;
-			const notiElement = document.querySelector("poke-notification");
-			if (notiElement) {
-				(notiElement as HTMLElement & { show: (msg: string) => void }).show(
-					msg.value,
-				);
-			}
+			duration.value = noti.duration;
 		}
 	});
 
@@ -32,5 +28,5 @@ onMounted(() => {
 </script>
 
 <template>
-	<poke-notification :msg="msg" :type="type"></poke-notification>
+	<poke-notification :msg="msg" :type="type" :duration="duration"></poke-notification>
 </template>

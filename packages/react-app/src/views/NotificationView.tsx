@@ -1,14 +1,18 @@
 import { notiStore } from "@core/blocs/notifications/noti.store";
-import "@ui/components/noti.element.js";
+import "@ui/components/noti.element";
 import { useEffect, useRef } from "react";
 
 export function NotificationView() {
-	const notiRef = useRef<HTMLElement & { show: (msg: string) => void }>(null);
+	const notiRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		const unsubscribe = notiStore.subscribe((state) => {
 			if (state.noti && notiRef.current) {
-				notiRef.current.show(state.noti.msg);
+				Object.assign(notiRef.current, {
+					msg: state.noti.msg,
+					type: state.noti.type,
+					duration: state.noti.duration,
+				});
 			}
 		});
 
