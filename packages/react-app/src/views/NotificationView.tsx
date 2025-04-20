@@ -30,6 +30,6 @@ export function NotificationView() {
 			msg={notification.msg}
 			type={notification.type}
 			duration={notification.duration}
-		/>
+		></poke-notification>
 	);
 }
