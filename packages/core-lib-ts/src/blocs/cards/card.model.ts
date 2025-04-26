@@ -1,13 +1,18 @@
-import { CardNameTooLongError } from "../../errors/card-name-too-long.error";
+import { z } from "zod";
+import { validate } from "../../helpers/validation";
 
-type CardType = Readonly<{
-	idCard: string;
-	nameCard: string;
-	supertype: string;
-	level: string;
-	hp: string;
-	imageCard: string;
-}>;
+const CardSchema = z.object({
+	idCard: z.string().nullable(),
+	nameCard: z.string().max(50, {
+		message: "Card name cannot exceed 50 characters",
+	}),
+	supertype: z.string(),
+	level: z.string().default("No Level Specified"),
+	hp: z.string(),
+	imageCard: z.string(),
+});
+
+type CardType = z.infer<typeof CardSchema>;
 
 export class Card {
 	readonly idCard: string;
@@ -17,19 +22,17 @@ export class Card {
 	readonly hp: string;
 	readonly imageCard: string;
 
-	constructor(card: CardType) {
+	private constructor(card: CardType) {
 		this.idCard = card.idCard;
-		this.nameCard = createValidatedCardName(card.nameCard);
+		this.nameCard = card.nameCard;
 		this.supertype = card.supertype;
-		this.level = card.level || "No Level Specified";
+		this.level = card.level;
 		this.hp = card.hp;
 		this.imageCard = card.imageCard;
 	}
-}
 
-const createValidatedCardName = (name: string): string => {
-	if (name.length > 50) {
-		throw new CardNameTooLongError(name);
+	static create(card: CardType): Card {
+		const parsedCard = validate(CardSchema, card);
+		return new Card(parsedCard);
 	}
-	return name;
-};
+}

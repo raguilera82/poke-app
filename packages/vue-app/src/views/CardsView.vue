@@ -2,6 +2,7 @@
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { type CardBlocState, cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import { ValidationError } from "@core/helpers/validation";
 import "@ui/components/cards-list.element";
 import "@ui/components/text-input.element";
 import { onMounted, onUnmounted, ref } from "vue";
@@ -12,7 +13,13 @@ import type { Ref } from "vue";
 const cardListRef: Ref<CardList | null> = ref(null);
 
 const filterByName = (event: { detail: string }) => {
-	cardBloc.filterByName(event.detail);
+	try {
+		cardBloc.filterByName(event.detail);
+	} catch (error) {
+		if (error instanceof ValidationError) {
+			notiBloc.showWarning(error.errors.byName[0]);
+		}
+	}
 };
 
 onMounted(async () => {

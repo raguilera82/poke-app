@@ -16,7 +16,12 @@ export class NotificationView extends LitElement {
 	connectedCallback(): void {
 		super.connectedCallback();
 		this.unsubscribe = notiStore.subscribe((state: NotiStoreState) => {
-			this.noti = state.noti;
+			if (state.noti) {
+				this.noti = null;
+				setTimeout(() => {
+					this.noti = { ...state.noti };
+				}, 10);
+			}
 		});
 	}
 

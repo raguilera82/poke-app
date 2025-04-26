@@ -83,7 +83,7 @@ export class NotificationElement extends LitElement {
 		const classes = {
 			notification: true,
 			visible: this.visible,
-			[this.type.toLowerCase()]: true,
+			[this.type?.toLowerCase()]: true,
 		};
 
 		return html`

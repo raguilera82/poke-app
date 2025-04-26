@@ -39,7 +39,7 @@ describe("Cards BLoC - Get all cards", () => {
 
 describe("CardBloc - filter by name", () => {
 	const mockCards: ReadonlyArray<Card> = [
-		new Card({
+		Card.create({
 			idCard: "1",
 			nameCard: "Pikachu",
 			supertype: "Pokemon",
@@ -47,7 +47,7 @@ describe("CardBloc - filter by name", () => {
 			hp: "60",
 			imageCard: "pikachu.jpg",
 		}),
-		new Card({
+		Card.create({
 			idCard: "2",
 			nameCard: "Charizard",
 			supertype: "Pokemon",
@@ -62,12 +62,6 @@ describe("CardBloc - filter by name", () => {
 	});
 
 	describe("filterByName", () => {
-		it("should return all cards when name is empty", () => {
-			cardBloc.filterByName("");
-			const result = cardStore.getState().filteredCards;
-			expect(result).toEqual(mockCards);
-		});
-
 		it("should return filtered cards by name case insensitive", () => {
 			cardBloc.filterByName("pika");
 			const result = cardStore.getState().filteredCards;

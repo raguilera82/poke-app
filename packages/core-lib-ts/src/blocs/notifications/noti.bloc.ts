@@ -11,6 +11,15 @@ class NotiBloc {
 		notiStore.setState({ noti });
 	}
 
+	showWarning(msg: string, duration = 3000): void {
+		const noti = new Noti({
+			msg,
+			type: "WARNING",
+			duration,
+		});
+		notiStore.setState({ noti });
+	}
+
 	get noti(): Noti | null {
 		return notiStore.getState().noti;
 	}

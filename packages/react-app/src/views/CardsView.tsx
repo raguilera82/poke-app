@@ -27,7 +27,7 @@ export function CardsView() {
 				setCards(allCards);
 				notiBloc.showInfo("Cards loaded");
 			} catch (error) {
-				console.error("Error fetching cards:", error);
+				console.error("Error fetching cards:", error.errors);
 			}
 		};
 
@@ -44,16 +44,25 @@ export function CardsView() {
 		const textInput = document.querySelector("poke-text-input");
 		if (textInput) {
 			textInput.addEventListener("on-submit", handleFilter);
-			return () => textInput.removeEventListener("on-submit", handleFilter);
+			textInput.addEventListener("on-reset", handleReset);
+			return () => {
+				textInput.removeEventListener("on-submit", handleFilter);
+				textInput.removeEventListener("on-reset", handleReset);
+			};
 		}
 	}, []);
+
+	const handleReset = async () => {
+		await cardBloc.getAllCards();
+	};
 
 	const handleFilter = async (event: CustomEvent<string>) => {
 		const query = event.detail;
 		try {
 			cardBloc.filterByName(query);
 		} catch (error) {
-			console.error("Error filtering cards:", error);
+			console.error("Error filtering cards:", JSON.stringify(error.errors));
+			notiBloc.showWarning(error.errors.byName[0]);
 		}
 	};
 
@@ -64,21 +73,4 @@ export function CardsView() {
 			<poke-cards-list ref={cardListRef} />
 		</>
 	);
-}
-
-declare global {
-	namespace JSX {
-		interface IntrinsicElements {
-			"poke-text-input": React.DetailedHTMLProps<
-				React.HTMLAttributes<HTMLElement>,
-				HTMLElement
-			> & {
-				buttonText?: string;
-			};
-			"poke-cards-list": React.DetailedHTMLProps<
-				React.HTMLAttributes<HTMLElement>,
-				HTMLElement
-			>;
-		}
-	}
 }

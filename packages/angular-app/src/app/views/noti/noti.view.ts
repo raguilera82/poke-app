@@ -4,6 +4,7 @@ import {
 	type OnDestroy,
 	type OnInit,
 } from "@angular/core";
+import type { Noti } from "@core/blocs/notifications/noti.model";
 import {
 	type NotiStoreState,
 	notiStore,
@@ -14,10 +15,10 @@ import {
 	template: `
     <poke-notification
       #notiElement
-      [msg]="msg"
-      [type]="type"
-	  [duration]="duration"
-    ></poke-notification>
+      [msg]="noti?.msg"
+      [type]="noti?.type"
+	  [duration]="noti?.duration"
+	  ></poke-notification>	
   `,
 	standalone: true,
 	imports: [],
@@ -25,16 +26,15 @@ import {
 })
 export class NotiView implements OnInit, OnDestroy {
 	private unsubscribenotiStore: () => void;
-	msg = "";
-	type = "INFO";
-	duration = 3000;
+	noti: Noti | null = null;
 
 	ngOnInit() {
 		this.unsubscribenotiStore = notiStore.subscribe((state: NotiStoreState) => {
 			if (state.noti) {
-				this.msg = state.noti.msg;
-				this.type = state.noti.type;
-				this.duration = state.noti.duration;
+				this.noti = null;
+				setTimeout(() => {
+					this.noti = { ...state.noti };
+				}, 10);
 			}
 		});
 	}

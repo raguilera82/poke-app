@@ -6,12 +6,22 @@
 	"private": true,
 	"workspaces": ["packages/*"],
 	"scripts": {
-		"check": "npx @biomejs/biome check --write"
+		"check": "npx @biomejs/biome check --write",
+		"angular": "npm run start --workspace=packages/angular-app",
+		"react": "npm run dev --workspace=packages/react-app",
+		"vue": "npm run dev --workspace=packages/vue-app",
+		"lit": "npm run dev --workspace=packages/lit-app",
+		"e2e": "npm run test:all --workspace=packages/e2e-tests",
+		"up": "concurrently \"npm run angular\" \"npm run react\" \"npm run vue\" \"npm run lit\"",
+		"test:e2e": "node scripts/run-tests.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4"
+		"@biomejs/biome": "1.9.4",
+		"concurrently": "^9.1.2",
+		"cross-env": "^7.0.3",
+		"wait-on": "^8.0.3"
 	}
 }

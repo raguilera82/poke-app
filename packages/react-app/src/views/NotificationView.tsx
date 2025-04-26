@@ -7,15 +7,18 @@ export function NotificationView() {
 		msg: "",
 		type: "INFO",
 		duration: 3000,
+		key: 0,
 	});
 
 	useEffect(() => {
 		const unsubscribe = notiStore.subscribe((state) => {
 			if (state.noti) {
+				console.log("Notification state changed:", state.noti);
 				setNotification({
 					msg: state.noti.msg,
 					type: state.noti.type,
 					duration: state.noti.duration,
+					key: Date.now(),
 				});
 			}
 		});
@@ -30,6 +33,7 @@ export function NotificationView() {
 			msg={notification.msg}
 			type={notification.type}
 			duration={notification.duration}
-		></poke-notification>
+			key={notification.key}
+		/>
 	);
 }

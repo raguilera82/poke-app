@@ -31,7 +31,9 @@
 				"noNonNullAssertion": "off"
 			},
 			"complexity": {
-				"noStaticOnlyClass": "off"
+				"noStaticOnlyClass": "off",
+				"noForEach": "off",
+				"useLiteralKeys": "off"
 			}
 		}
 	},

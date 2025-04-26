@@ -13,7 +13,7 @@ export class CardsRepository {
 		const data = cards200.data.data;
 
 		const cards = data.map((card: Daum) => {
-			return new Card({
+			return Card.create({
 				idCard: card.id,
 				nameCard: card.name,
 				supertype: card.supertype,

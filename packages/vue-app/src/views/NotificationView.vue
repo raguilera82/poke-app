@@ -10,6 +10,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 const msg = ref("");
 const type = ref("INFO");
 const duration = ref(3000);
+const key = ref(0);
 
 onMounted(() => {
 	const unsubscribe = notiStore.subscribe((state: NotiStoreState) => {
@@ -18,6 +19,7 @@ onMounted(() => {
 			msg.value = noti.msg;
 			type.value = noti.type;
 			duration.value = noti.duration;
+			key.value = Date.now();
 		}
 	});
 
@@ -28,5 +30,5 @@ onMounted(() => {
 </script>
 
 <template>
-	<poke-notification :msg="msg" :type="type" :duration="duration"></poke-notification>
+	<poke-notification :msg="msg" :type="type" :duration="duration" :key="key"></poke-notification>
 </template>

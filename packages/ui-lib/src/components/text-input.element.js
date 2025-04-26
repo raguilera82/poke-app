@@ -6,6 +6,7 @@ export class TextInput extends LitElement {
 			value: { type: String },
 			placeholder: { type: String },
 			buttonText: { type: String },
+			resetText: { type: String },
 		};
 	}
 
@@ -14,6 +15,7 @@ export class TextInput extends LitElement {
 		this.value = "";
 		this.placeholder = "Type here...";
 		this.buttonText = "Submit";
+		this.resetText = "Reset";
 	}
 
 	static get styles() {
@@ -44,8 +46,8 @@ export class TextInput extends LitElement {
         transition: background-color 0.3s ease;
       }
 
-      button:hover {
-        background-color: #45a049;
+      .reset {
+        background-color: #f44336;
       }
 
       @media (max-width: 600px) {
@@ -69,6 +71,16 @@ export class TextInput extends LitElement {
 		this.dispatchEvent(event);
 	}
 
+	handleReset() {
+		this.value = "";
+		const event = new CustomEvent("on-reset", {
+			detail: this.value,
+			bubbles: true,
+			composed: true,
+		});
+		this.dispatchEvent(event);
+	}
+
 	render() {
 		return html`
       <style>
@@ -83,6 +95,9 @@ export class TextInput extends LitElement {
           @keyup=${(e) => e.key === "Enter" && this.handleSubmit()}
         />
         <button @click=${this.handleSubmit}>${this.buttonText}</button>
+        <button class="reset" @click=${this.handleReset}>
+          ${this.resetText}
+        </button>
       </div>
     `;
 	}

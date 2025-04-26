@@ -9,6 +9,7 @@ import { cardBloc } from "@core/blocs/cards/card.bloc";
 import type { Card } from "@core/blocs/cards/card.model";
 import { cardStore } from "@core/blocs/cards/card.store";
 import { notiBloc } from "@core/blocs/notifications/noti.bloc";
+import { ValidationError } from "@core/helpers/validation";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 
@@ -39,6 +40,12 @@ export class CardsView implements OnInit, OnDestroy {
 
 	filterByName(e) {
 		const name = e.target.value;
-		cardBloc.filterByName(name);
+		try {
+			cardBloc.filterByName(name);
+		} catch (error) {
+			if (error instanceof ValidationError) {
+				notiBloc.showWarning(error.errors["byName"][0]);
+			}
+		}
 	}
 }
