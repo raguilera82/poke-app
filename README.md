@@ -20,43 +20,48 @@ A collection of Pokemon-related applications built with different frameworks and
 - Node.js 18 or higher
 - npm 7 or higher (for workspace support)
 
-### Installation
+### Installation all dependencies
 
 ```bash
-# Install all dependencies
 cd poke-app
 npm install
 ```
 
-## 🏃‍♂️ Running the Applications
+## 🏃‍♂️ Running the Applications (One single command)
+```bash
+npm run up
+```
+
+## 🏃‍♂️ Running the Applications (Individual)
 
 ### Angular App
 ```bash
-cd packages/angular-app
-npm run start #port=9100
+npm run angular #port=9100
 ```
 
 ### React App
 ```bash
-cd packages/react-app
-npm run dev #port=9101
+npm run react #port=9101
 ```
 
 ### Vue App
 ```bash
-cd packages/vue-app
-npm run dev #port=9102
+npm run vue #port=9102
 ```
 
 ### Lit App
 ```bash
-cd packages/lit-app
-npm run dev #port=9103
+npm run lit #port=9103
 ```
 
 ## 🧪 Testing
 
-### Running E2E Tests
+### Running E2E Tests (All with one command)
+```bash
+npm run test:e2e
+```
+
+### Running E2E Tests (Individual)
 Note: All apps are running
 ```bash
 cd packages/e2e-tests
@@ -70,7 +75,6 @@ npm run show-report   # View test results
 
 ### Core Library Tests
 ```bash
-cd packages/core-lib-ts
 npm run test
 ```
 
@@ -78,6 +82,5 @@ npm run test
 
 ### Code Formatting
 ```bash
-cd poke-app
 npm run check  # Format all files using Biome
 ```

@@ -13,7 +13,8 @@
 		"lit": "npm run dev --workspace=packages/lit-app",
 		"e2e": "npm run test:all --workspace=packages/e2e-tests",
 		"up": "concurrently \"npm run angular\" \"npm run react\" \"npm run vue\" \"npm run lit\"",
-		"test:e2e": "node scripts/run-tests.js"
+		"test:e2e": "node scripts/run-tests.js",
+		"test:core": "npm run test:run --workspace=packages/core-lib-ts"
 	},
 	"keywords": [],
 	"author": "",
