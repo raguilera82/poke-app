@@ -8,8 +8,6 @@ import {
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import type { Card } from "@core/blocs/cards/card.model";
 import { cardStore } from "@core/blocs/cards/card.store";
-import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import { ValidationError } from "@core/helpers/validation";
 import "@ui/components/cards-list.element.js";
 import "@ui/components/text-input.element.js";
 
@@ -27,7 +25,6 @@ export class CardsView implements OnInit, OnDestroy {
 
 	async ngOnInit() {
 		this.cards = await cardBloc.getAllCards();
-		notiBloc.showInfo("Cards Loaded");
 
 		this.unsubscribeCardStore = cardStore.subscribe((state) => {
 			this.cards = state.filteredCards;
@@ -38,14 +35,12 @@ export class CardsView implements OnInit, OnDestroy {
 		this.unsubscribeCardStore();
 	}
 
+	onReset() {
+		cardBloc.getAllCards();
+	}
+
 	filterByName(e) {
 		const name = e.target.value;
-		try {
-			cardBloc.filterByName(name);
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				notiBloc.showWarning(error.errors["byName"][0]);
-			}
-		}
+		cardBloc.filterByName(name);
 	}
 }

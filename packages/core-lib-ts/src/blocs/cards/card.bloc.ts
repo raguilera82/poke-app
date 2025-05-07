@@ -1,3 +1,4 @@
+import { notiBloc } from "../notifications/noti.bloc";
 import type { Card } from "./card.model";
 import { cardStore } from "./card.store";
 import { Filters } from "./filters.model";
@@ -9,11 +10,15 @@ class CardBloc {
 	async getAllCards(): Promise<ReadonlyArray<Card>> {
 		const cards = await GetAllCardsUseCase.run();
 		cardStore.setState({ cards, filteredCards: cards });
+		notiBloc.showInfo("Cards loaded");
 		return cards;
 	}
 
 	filterByName(name: string): void {
-		Filters.create({ byName: name });
+		const filters = Filters.create({ byName: name });
+		if (filters.errors) {
+			notiBloc.showWarning(filters.errors["byName"][0]);
+		}
 		const { cards } = cardStore.getState();
 		const filteredCards = FilterCardsByNameUseCase.run(cards, name);
 		cardStore.setState({ filteredCards: filteredCards });

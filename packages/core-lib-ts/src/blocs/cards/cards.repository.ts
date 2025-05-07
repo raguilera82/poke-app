@@ -4,11 +4,10 @@ import { Card } from "./card.model";
 
 export class CardsRepository {
 	async getAllCards(): Promise<ReadonlyArray<Card>> {
-		/* const response = await axios.get<CardsPaginateDTO>(
+		/* const response = await http.get<CardsPaginateDTO>(
 			`${configBloc.config.apiBaseUrl}/v2/cards`,
-		); 
-		const data = response.data.data;
-		*/
+		);
+		const data = response.data; */
 
 		const data = cards200.data.data;
 
@@ -20,7 +19,7 @@ export class CardsRepository {
 				level: card.level,
 				hp: card.hp,
 				imageCard: card.images.large,
-			});
+			}) as Card;
 		});
 
 		return cards;

@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { validate } from "../../helpers/validation";
+import {
+	type ValidationErrors,
+	validation,
+} from "../../helpers/validation.helper";
 
 const CardSchema = z.object({
 	idCard: z.string().nullable(),
@@ -31,8 +34,11 @@ export class Card {
 		this.imageCard = card.imageCard;
 	}
 
-	static create(card: CardType): Card {
-		const parsedCard = validate(CardSchema, card);
-		return new Card(parsedCard);
+	static create(card: CardType): Card | ValidationErrors {
+		const checkResult = validation.check(CardSchema, card);
+		if (checkResult.success) {
+			return new Card(checkResult.data);
+		}
+		return checkResult.errors;
 	}
 }

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { cardBloc } from "@core/blocs/cards/card.bloc";
 import { type CardBlocState, cardStore } from "@core/blocs/cards/card.store";
-import { notiBloc } from "@core/blocs/notifications/noti.bloc";
-import { ValidationError } from "@core/helpers/validation";
 import "@ui/components/cards-list.element";
 import "@ui/components/text-input.element";
 import { onMounted, onUnmounted, ref } from "vue";
@@ -13,13 +11,12 @@ import type { Ref } from "vue";
 const cardListRef: Ref<CardList | null> = ref(null);
 
 const filterByName = (event: { detail: string }) => {
-	try {
-		cardBloc.filterByName(event.detail);
-	} catch (error) {
-		if (error instanceof ValidationError) {
-			notiBloc.showWarning(error.errors.byName[0]);
-		}
-	}
+	cardBloc.filterByName(event.detail);
+
+};
+
+const onReset = () => {
+	cardBloc.getAllCards();
 };
 
 onMounted(async () => {
@@ -30,7 +27,6 @@ onMounted(async () => {
 	});
 
 	const cards = await cardBloc.getAllCards();
-	notiBloc.showInfo("Cards loaded");
 
 	if (cardListRef.value) {
 		cardListRef.value.cards = [...cards];
@@ -44,6 +40,6 @@ onMounted(async () => {
 
 <template>
 	<h1>Vue Pokemóns</h1>
-	<poke-text-input buttonText="Filter" @on-submit="filterByName"></poke-text-input>
+	<poke-text-input buttonText="Filter" @on-submit="filterByName" @on-reset="onReset"></poke-text-input>
 	<poke-cards-list ref="cardListRef"></poke-cards-list>
 </template>

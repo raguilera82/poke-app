@@ -10,7 +10,7 @@ test.describe("Pokemon tests", () => {
 	});
 
 	test('filters pokemon cards by name "cater"', async ({ page }) => {
-		await page.goto("http://localhost:9103/");
+		await page.goto("/");
 
 		// Wait for at least one card to be visible before continuing
 		await page.locator(".card").first().waitFor();
