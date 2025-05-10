@@ -2,6 +2,8 @@
 
 A collection of Pokemon-related applications built with different frameworks and shared libraries.
 
+Deep Wiki URL: https://deepwiki.com/raguilera82/poke-app 
+
 ## 📦 Project Structure
 
 - 🅰️ `angular-app`: Pokemon application built with Angular with TypeScript
